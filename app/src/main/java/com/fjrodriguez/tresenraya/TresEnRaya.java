@@ -1,5 +1,7 @@
 package com.fjrodriguez.tresenraya;
 
+import java.util.Random;
+
 /**
  * Created by fjrodriguez on 28/06/14.
  */
@@ -9,22 +11,34 @@ public class TresEnRaya {
     public final int JUGADOR1 = 1;
     public final int JUGADOR2 = 2;
     public int jugador;
+    private int numJugadas;
+    private boolean finDePartida;
+    static private Random random;
 
     public TresEnRaya ()  {
         // Inicializamos el tablero a cero.
+        random = new Random();
         borrarTablero();
         jugador = JUGADOR1;
     }
 
     public void borrarTablero () {
+        numJugadas = 0;
+        finDePartida = false;
+
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 tablero[i][j] = 0;
             }
         }
     }
-    public void juegaJugador (int jugador, int posX, int posY) {
-        tablero[posX][posY] = jugador;
+    public boolean juegaJugador (int jugador, int posX, int posY) {
+        if (tablero[posX][posY] == 0) {
+            tablero[posX][posY] = jugador;
+            numJugadas++;
+            return true;
+        }
+        return false;
     }
 
     private boolean solucionColumna (int jugador, int posX) {
@@ -44,20 +58,17 @@ public class TresEnRaya {
     }
 
     private boolean solucionDiagonal1(int jugador) {
-        if (tablero[0][0] == jugador && tablero[1][1] == jugador
-                && tablero[2][2] == jugador)
-            return true;
-        return false;
+        return tablero[0][0] == jugador && tablero[1][1] == jugador
+                && tablero[2][2] == jugador;
     }
 
     private boolean solucionDiagonal2(int jugador) {
-        if (tablero[2][0] == jugador && tablero[1][1] == jugador
-                && tablero[0][2] == jugador)
-            return true;
-        return false;
+        return tablero[2][0] == jugador && tablero[1][1] == jugador
+                && tablero[0][2] == jugador;
     }
 
     public boolean haGanado (int jugador, int posX, int posY) {
+        finDePartida = true;
         if (solucionFila(jugador, posY))
             return true;
         if (solucionColumna(jugador, posX))
@@ -70,6 +81,16 @@ public class TresEnRaya {
         if ((posX == 0 && posY == 2) || (posX == 2 && posY == 0) || (posX == 1 && posY == 1))
             if (solucionDiagonal2(jugador))
                 return true;
+        finDePartida = false;
         return false;
+    }
+
+    public void juegaMaquina(int jugador) {
+        while (!juegaJugador(jugador, random.nextInt(3), random.nextInt(3))) {
+            continue;
+        }
+    }
+    public boolean finalizaPartida() {
+        return numJugadas == 9 || finDePartida;
     }
 }

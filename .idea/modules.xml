@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TresEnRaya-Android.iml" filepath="$PROJECT_DIR$/TresEnRaya-Android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TresEnRaya-Android.iml" filepath="$PROJECT_DIR$/TresEnRaya-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/TresenRaya.iml" filepath="$PROJECT_DIR$/TresenRaya.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
