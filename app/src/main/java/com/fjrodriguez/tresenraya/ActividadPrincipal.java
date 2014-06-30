@@ -89,23 +89,23 @@ public class ActividadPrincipal extends Activity {
         /* TODO: cambiar el parámetro de backgroundResource
             porque desaparece el botón. */
         imageButton = (ImageButton) findViewById(R.id.imageButton00);
-        imageButton.setBackgroundResource(0);
+        imageButton.setBackgroundResource(R.drawable.imagen_vacia);
         imageButton = (ImageButton) findViewById(R.id.imageButton01);
-        imageButton.setBackgroundResource(0);
+        imageButton.setBackgroundResource(R.drawable.imagen_vacia);
         imageButton = (ImageButton) findViewById(R.id.imageButton02);
-        imageButton.setBackgroundResource(0);
+        imageButton.setBackgroundResource(R.drawable.imagen_vacia);
         imageButton = (ImageButton) findViewById(R.id.imageButton10);
-        imageButton.setBackgroundResource(0);
+        imageButton.setBackgroundResource(R.drawable.imagen_vacia);
         imageButton = (ImageButton) findViewById(R.id.imageButton11);
-        imageButton.setBackgroundResource(0);
+        imageButton.setBackgroundResource(R.drawable.imagen_vacia);
         imageButton = (ImageButton) findViewById(R.id.imageButton12);
-        imageButton.setBackgroundResource(0);
+        imageButton.setBackgroundResource(R.drawable.imagen_vacia);
         imageButton = (ImageButton) findViewById(R.id.imageButton20);
-        imageButton.setBackgroundResource(0);
+        imageButton.setBackgroundResource(R.drawable.imagen_vacia);
         imageButton = (ImageButton) findViewById(R.id.imageButton21);
-        imageButton.setBackgroundResource(0);
+        imageButton.setBackgroundResource(R.drawable.imagen_vacia);
         imageButton = (ImageButton) findViewById(R.id.imageButton22);
-        imageButton.setBackgroundResource(0);
+        imageButton.setBackgroundResource(R.drawable.imagen_vacia);
 
     }
 }
