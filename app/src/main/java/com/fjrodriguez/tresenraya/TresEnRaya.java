@@ -1,7 +1,5 @@
 package com.fjrodriguez.tresenraya;
 
-import java.util.Random;
-
 /**
  * Created by fjrodriguez on 28/06/14.
  */
@@ -13,11 +11,9 @@ public class TresEnRaya {
     public int jugador;
     private int numJugadas;
     private boolean finDePartida;
-    static private Random random;
 
     public TresEnRaya ()  {
         // Inicializamos el tablero a cero.
-        random = new Random();
         borrarTablero();
         jugador = JUGADOR1;
     }
@@ -85,11 +81,6 @@ public class TresEnRaya {
         return false;
     }
 
-    public void juegaMaquina(int jugador) {
-        while (!juegaJugador(jugador, random.nextInt(3), random.nextInt(3))) {
-            continue;
-        }
-    }
     public boolean finalizaPartida() {
         return numJugadas == 9 || finDePartida;
     }

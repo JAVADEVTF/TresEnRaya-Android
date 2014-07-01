@@ -9,11 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Random;
+
 
 public class ActividadPrincipal extends Activity {
 
     private TresEnRaya tresEnRaya;
     private TextView textView;
+    static private Random r;
+    private int[][] idBotones = new int[3][3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,20 @@ public class ActividadPrincipal extends Activity {
         setContentView(R.layout.activity_actividad_principal);
         tresEnRaya = new TresEnRaya();
         textView = (TextView) findViewById(R.id.textViewMensaje);
+        r = new Random();
+
+        // Guardamos los id de los botones.
+        idBotones[0][0] = R.id.button;
+        idBotones[0][1] = R.id.button2;
+        idBotones[0][2] = R.id.button3;
+        idBotones[1][0] = R.id.button4;
+        idBotones[1][1] = R.id.button5;
+        idBotones[1][2] = R.id.button6;
+        idBotones[2][0] = R.id.button7;
+        idBotones[2][1] = R.id.button8;
+        idBotones[2][2] = R.id.button9;
+
+
     }
 
 
@@ -45,48 +63,47 @@ public class ActividadPrincipal extends Activity {
         startActivity(intent);
     }
 
-    // TODO: Implementar la función de jugar con la máquina.
-    // juegaría de forma aleatoria con la función Random.
-
+    // TODO: Falla cuando el usuario pulsa el último botón que no se ha jugado.
     public void pulsadoBoton (View view) {
         String posBoton;
         int posX, posY;
+        Button button;
 
-        // Comprobamos que no ha terminado la partida.
+        // Comprobamos si ha terminado la partida.
         if (tresEnRaya.finalizaPartida()) {
             textView.setText("Ha finalizado la partida! Pulse nueva partida.");
             return;
         }
 
-        Button button = (Button) findViewById(view.getId());
-
+        tresEnRaya.jugador = tresEnRaya.JUGADOR1;
+        button = (Button) findViewById(view.getId());
         posBoton = button.getTag().toString();
         posX = posBoton.charAt(0) - '0';
         posY = posBoton.charAt(1) - '0';
-
         // Comprobamos que la posición no se ha jugado antes.
-        if (tresEnRaya.juegaJugador(tresEnRaya.jugador, posX, posY)) {
-            if (tresEnRaya.jugador == tresEnRaya.JUGADOR1)
-                button.setText("X");
-            else
-                button.setText("O");
-
-            if (!tresEnRaya.haGanado(tresEnRaya.jugador, posX, posY))
-                if (tresEnRaya.jugador == tresEnRaya.JUGADOR1) {
-                    // pasamos el turno al siguiente jugador.
-                    tresEnRaya.jugador = tresEnRaya.JUGADOR2;
-                    textView.setText("Juega jugador: " + tresEnRaya.jugador);
-                }
-                else {
-                    // pasamos el turno al siguiente jugador.
-                    tresEnRaya.jugador = tresEnRaya.JUGADOR1;
-                    textView.setText("Juega jugador: " + tresEnRaya.jugador);
-                }
-            else
-                textView.setText("Ha ganado el jugador: " + tresEnRaya.jugador+". Pulse nueva partida.");
-        }
-        else
+        if (tresEnRaya.juegaJugador(tresEnRaya.jugador, posX, posY))
+            button.setText("X");
+        else {
             textView.setText("No se puede jugar en esta posición.");
+            return;
+        }
+
+        if (tresEnRaya.haGanado(tresEnRaya.jugador, posX, posY)) {
+            textView.setText("Ha ganado el jugador: " + tresEnRaya.jugador + ". Pulse nueva partida.");
+            return;
+        }
+
+        // Hacemos que juegue la máquina.
+        tresEnRaya.jugador = tresEnRaya.JUGADOR2;
+        do {
+            posX = r.nextInt(3);
+            posY = r.nextInt(3);
+        } while (!tresEnRaya.juegaJugador(tresEnRaya.jugador, posX, posY));
+        button = (Button) findViewById(idBotones[posX][posY]);
+        button.setText("O");
+
+        if (tresEnRaya.haGanado(tresEnRaya.jugador, posX, posY))
+            textView.setText("Ha ganado el jugador: " + tresEnRaya.jugador + ". Pulse nueva partida.");
 
     }
 
